@@ -154,7 +154,7 @@
     import { fetchData } from "../api/index";
     import service from "../utils/request";
     export default {
-        name: "basetable",
+        name: "category",
         data() {
             return {
                 addCategoryVisible: false,
@@ -207,7 +207,11 @@
             };
         },
         created() {
+            console.log("create")
             this.getData();
+        },
+        activated() {
+            console.log("category")
         },
         methods: {
             changeCategory() {

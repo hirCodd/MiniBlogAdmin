@@ -133,6 +133,10 @@ export default {
     },
     created() {
         this.getData();
+        console.log("basetable")
+    },
+    activated() {
+        console.log("basewwwwwwtable")
     },
     methods: {
         // 获取 easy-mock 的模拟数据

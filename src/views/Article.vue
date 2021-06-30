@@ -35,28 +35,18 @@
                         </template>
                     </el-upload>
                 </el-form-item>
-                <el-form-item label="默认显示所有Tag">
-                    <div class="block">
-<!--                        <span class="demonstration">默认显示所有Tag</span>-->
-                        <el-cascader
-                                v-model="form.categories"
-                                :options="options2"
-                                :props="props"
-                                clearable></el-cascader>
-                    </div>
+                <el-form-item label="文章分类">
+                    <el-select v-model="form.categories"
+                               multiple
+                               placeholder="请选择">
+                        <el-option
+                                v-for="item in options"
+                                :key="item.key"
+                                :label="item.value"
+                                :value="item.value">
+                        </el-option>
+                    </el-select>
                 </el-form-item>
-<!--                <el-form-item label="文章分类">-->
-<!--                    <el-select v-model="form.categories"-->
-<!--                               multiple-->
-<!--                               placeholder="请选择">-->
-<!--                        <el-option-->
-<!--                                v-for="item in options"-->
-<!--                                :key="item.key"-->
-<!--                                :label="item.value"-->
-<!--                                :value="item.value">-->
-<!--                        </el-option>-->
-<!--                    </el-select>-->
-<!--                </el-form-item>-->
                 <el-form-item label="文章标签">
                     <el-tag
                             :key="tag"
@@ -145,40 +135,6 @@ export default {
                 key: 'other',
                 value: '技术杂谈'
             }],
-            options2: [{
-                value: 1,
-                label: '东南',
-                children: [{
-                    value: 2,
-                    label: '上海',
-                    children: [
-                        { value: 3, label: '普陀' },
-                        { value: 4, label: '黄埔' },
-                        { value: 5, label: '徐汇' }
-                    ]
-                }, {
-                    value: 7,
-                    label: '江苏',
-                    children: [
-                        { value: 8, label: '南京' },
-                        { value: 9, label: '苏州' },
-                        { value: 10, label: '无锡' }
-                    ]
-                }, {
-                    value: 12,
-                    label: '浙江',
-                    children: [
-                        { value: 13, label: '杭州' },
-                        { value: 14, label: '宁波' },
-                        { value: 15, label: '嘉兴' }
-                    ]
-                }]
-            }, {
-                value: 17,
-                label: '西北',
-            }],
-            value: [],
-            props: { multiple: true },
         }
     },
     methods: {
@@ -189,8 +145,7 @@ export default {
             console.log(fileList, file)
         },
         submit(){
-            console.log(this.form)
-            service.post('/admin/article/publish', {
+            service.post('http://localhost:8090/api/admin/article/publish', {
                 'title': this.form.title,
                 'author': this.form.author,
                 'thumb': this.form.thumb,
@@ -200,13 +155,7 @@ export default {
                 'isTop': this.form.isTop,
                 'content': this.form.content
             })
-            // service.post('/article/publish', {
-            //     'title': this.title,
-            //     'author': this.author,
-            //     'tags': this.dynamicTags.toString(),
-            //     'category': this.category.toString(),
-            //     'content': this.content
-            // });
+            // 提交文章并返回文章列表
             this.$message.success('提交成功！');
         },
         // 处理标签功能

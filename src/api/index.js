@@ -7,3 +7,10 @@ export const fetchData = query => {
         params: query
     });
 };
+
+export const getArticles = () => {
+    return request({
+        url: "http://localhost:8090/api/admin/article/get/articles",
+        method: "get"
+    });
+}

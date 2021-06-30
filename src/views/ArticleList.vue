@@ -8,14 +8,19 @@
         </div>
         <div class="container">
             <el-row :gutter="20" :type="flex">
-                <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6" v-for="(o, index) in 8" :key="o" :offset="index > 0 ? 0 : 0">
+                <el-col :xs="6" :sm="6" :md="6" :lg="6" :xl="6" v-for="(item, key, index) in articles" :key="key" :offset="index > 0 ? 0 : 0">
                     <el-card :body-style="{ padding: '0px' }">
-                        <img src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" class="image" style="width: 100%">
+                        <img :src="item.thumb" class="image" style="width: 100%">
                         <div style="padding: 14px;">
-                            <span>好吃的汉堡</span>
+                            <span>{{item.id}}.{{item.title}}</span>
                             <div class="bottom">
-                                <time class="time">{{ currentDate }}</time>
-                                <el-button type="text" class="button">操作按钮</el-button>
+                                <time class="time">{{ item.publishTime }}</time>
+<!--                                <el-button type="primary" icon="el-icon-edit" round>编辑</el-button>-->
+<!--                                <el-button type="danger" icon="el-icon-delete" round>删除</el-button>-->
+                                <div class="operator-button">
+                                    <el-button type="primary" icon="el-icon-edit" round></el-button>
+                                    <el-button type="danger" icon="el-icon-delete" round></el-button>
+                                </div>
                             </div>
                         </div>
                     </el-card>
@@ -39,8 +44,10 @@
 // import 'mavon-editor/dist/css/index.css'
 // import service from "../utils/request";
 
+import {getArticles} from "../api";
+
 export default {
-    name: "article",
+    name: "article-list",
     components: {
         // mavonEditor
     },
@@ -54,10 +61,23 @@ export default {
                 pageIndex: 1,
                 pageSize: 10
             },
+            articles: []
         }
     },
+    created() {
+        console.log("create")
+    },
+    activated() {
+        var that = this;
+        getArticles().then(res => {
+            that.articles = res.data
+            console.log(res)
+        })
+    },
     methods: {
+        handlePageChange() {
 
+        }
     }
 
 };
@@ -73,6 +93,11 @@ export default {
 .time {
     font-size: 13px;
     color: #999;
+    float: left;
+}
+.tag {
+    font-size: 13px;
+    color: #999;
 }
 
 .bottom {
@@ -81,6 +106,13 @@ export default {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .el-button.is-round {
+        padding: 5px 12px;
+    }
+}
+.operator-button {
+    display: flex;
+    justify-content:flex-end;
 }
 
 </style>
