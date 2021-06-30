@@ -61,6 +61,21 @@ export default {
                     title: "系统首页"
                 },
                 {
+                    icon: "el-icon-lx-home",
+                    index: "article-list",
+                    title: "文章列表"
+                },
+                {
+                    icon: "el-icon-lx-emoji",
+                    index: "article",
+                    title: "文章发布"
+                },
+                {
+                  icon: "el-icon-lx-emoji",
+                  index: "category",
+                  title: "文章分类管理"
+                },
+                {
                     icon: "el-icon-lx-cascades",
                     index: "table",
                     title: "基础表格"

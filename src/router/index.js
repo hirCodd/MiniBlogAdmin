@@ -20,6 +20,27 @@ const routes = [
                 /* webpackChunkName: "dashboard" */
                 "../views/Dashboard.vue")
             }, {
+                path: "/article",
+                name: "article",
+                meta: {
+                    title: '文章发布'
+                },
+                component: () => import("../views/Article.vue")
+            }, {
+                path: "/category",
+                name: "category",
+                meta: {
+                    title: '文章分类管理'
+                },
+                component: () => import("../views/Category.vue")
+            }, {
+                path: "/article-list",
+                name: "article-list",
+                meta: {
+                    title: "文章列表"
+                },
+                component: () => import("../views/ArticleList")
+            }, {
                 path: "/table",
                 name: "basetable",
                 meta: {
