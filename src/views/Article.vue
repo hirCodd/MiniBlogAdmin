@@ -10,7 +10,7 @@
             <div class="plugins-tips">
                 <p class="title">Markdown格式文章发布系统</p>
             </div>
-            <el-form ref="form"  label-width="120px">
+            <el-form ref="form" label-width="120px">
                 <el-form-item label="文章标题">
                     <el-input v-model="form.title"></el-input>
                 </el-form-item>
