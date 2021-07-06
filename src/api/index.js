@@ -45,3 +45,8 @@ export const deleteArticleById = (id) => {
     })
 };
 
+export const getCategories = (pageIndex, pageSize) => {
+    return request({
+        url: "http://localhost:8090/api/admin/category/get/categories?pageIndex=" + pageIndex + "&pageSize=" + pageSize,
+    })
+};
